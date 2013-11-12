@@ -10,6 +10,12 @@
 #define wrossmckLogger_hpp
 
 
+#ifndef WROSSMCKLOGGER
+	#define WROSSMCKLOGGER VERB
+#endif
+
+
+
 #include <ostream>
 #include <iostream>
 
