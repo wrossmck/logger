@@ -9,9 +9,6 @@
 #ifndef wrossmckLogger_hpp
 #define wrossmckLogger_hpp
 
-#ifndef WROSSMCKLOGGER
-	#define WROSSMCKLOGGER VERB
-#endif
 
 #include <ostream>
 #include <iostream>
@@ -26,20 +23,20 @@ enum WROSSMCKLOGGERLEVEL {
 
 template <class T>
 void _log(WROSSMCKLOGGERLEVEL b, T a){
-#if (b<=WROSSMCKLOGGER)
-	std::ostream &c = b==ERR ? std::cout : std::cerr;
-	c<<a<<std::endl;
-#endif
+	if (b<=WROSSMCKLOGGER){
+		std::ostream &c = b==ERR ? std::cout : std::cerr;
+		c<<a<<std::endl;
+	}
 }
 
 template<typename T, typename... Args>
 void _log(WROSSMCKLOGGERLEVEL b, T a, Args... args) // recursive variadic function
 {
-#if (b<=WROSSMCKLOGGER)
-	std::ostream &c = b==ERR ? std::cout : std::cerr;
-	c<<a;
-	_log(b, args...) ;
-#endif
+	if (b<=WROSSMCKLOGGER) {
+		std::ostream &c = b==ERR ? std::cout : std::cerr;
+		c<<a;
+		_log(b, args...) ;
+	}
 }
 
 
